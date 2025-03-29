@@ -1,0 +1,499 @@
+{
+  "pages": [
+    //pages数组中第一项表示应用启动页,
+    {
+      "path": "pages/guide/index",
+      "style": {
+        "navigationBarTitleText": "启动页",
+        "app-plus": {
+          "titleNView": false
+        },
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/guide/list",
+      "style": {
+        "navigationBarTitleText": "启动介绍页",
+        "app-plus": {
+          "titleNView": false,
+          "bounce": "none"
+        },
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/SmartCity/smartcity",
+      "style": {
+        "navigationBarTitleText": "首页",
+        "navigationBarBackgroundColor": "#ED292A",
+        "enablePullDownRefresh": true
+      }
+    },
+    {
+      "path": "pages/login/login",
+      "style": {
+        "app-plus": {
+          "titleNView": false
+        }
+      }
+    },
+    {
+      "path": "pages/reg/reg",
+      "style": {
+        "navigationBarTitleText": "注册"
+      }
+    },
+    {
+      "path": "pages/pwd/pwd",
+      "style": {
+        "navigationBarTitleText": "忘记密码"
+      }
+    },
+	{
+	  "path": "pages/signIn/signIn",
+	  "style": {
+	    "navigationBarTitleText": "签到"
+	  }
+	},
+    {
+      "path": "pages/user/person",
+      "style": {
+        "navigationBarTitleText": "个人中心",
+        "navigationBarBackgroundColor": "#e52d27",
+        "app-plus": {
+          // "titleNView": false //禁用原生导航栏
+        }
+      }
+    },
+    {
+      "path": "pages/navs/navs",
+      "style": {
+        "navigationBarTitleText": "全部功能"
+      }
+    }, {
+      "path": "pages/proc/proc-list/proc-list",
+      "style": {}
+    }, {
+      "path": "pages/normal/list/list",
+      "style": {
+        "navigationBarTitleText": "列表",
+        "enablePullDownRefresh": true,
+        "onReachBottomDistance": 20,
+        "app-plus": {
+          "titleNView": {}
+        }
+      }
+    }, {
+      "path": "pages/normal/detail/detail",
+      "style": {
+        "navigationBarTitleText": "详情",
+        "onReachBottomDistance": 100, // 页面上拉触底事件触发时距页面底部距离, 默认 50
+        "app-plus": {
+          "bounce": "none" // 取消iOS回弹,避免和下拉刷新冲突 (小程序无法取消)
+        }
+      }
+    }, { 
+      "path": "pages/message/message",
+      "style": {
+        "navigationBarTitleText": "消息",
+		"enablePullDownRefresh": true
+      }
+    },
+	{ 
+      "path": "pages/message/listxq",
+      "style": {
+		"enablePullDownRefresh": true
+      }
+    },
+    {
+      "path": "pages/zhdj/gggs",
+      "style": {
+        "navigationBarTitleText": "列表"
+      }
+
+    },
+    {
+      "path": "pages/shzz/zzhome",
+      "style": {
+        "navigationBarTitleText": "列表"
+      }
+    },
+	{
+	  "path": "pages/shzz/xmmxx",
+	  "style": {
+	  }
+	},
+    // {
+    //   "path": "pages/sqfw/sqfw",
+    //   "style": {
+    //     "navigationBarTitleText": "社区服务",
+    //     "navigationBarBackgroundColor": "#FB6A6A"
+    //   }
+    // },
+    {
+      "path": "pages/sqfw/dsf",
+      "style": {
+        "navigationBarTitleText": "服务"
+      }
+    },
+    {
+      "path": "pages/audit/audit",
+      "style": {
+        "navigationBarTitleText": "审核"
+      }
+    },
+	{
+	  "path": "pages/auditAll/auditAllList",
+	  "style": {
+	    "navigationBarTitleText": "我的审核",
+		"enablePullDownRefresh": true
+	  }
+	},
+	{
+	  "path": "pages/auditAll/auditall",
+	  "style": {
+	    "navigationBarTitleText": "待审核"
+	  }
+	},
+    {
+      "path": "pages/audit/auditList",
+      "style": {
+        "navigationBarTitleText": "待审核",
+        "enablePullDownRefresh": true,
+        "app-plus": {
+          // "titleNView": false
+        }
+      }
+    },
+    {
+      "path": "pages/sqfw/dsftwo",
+      "style": {
+        "navigationBarTitleText": "第三方服务",
+        "navigationBarBackgroundColor": "#FB6A6A"
+      }
+    },
+    {
+      "path": "pages/sqfw/sqxq",
+      "style": {
+        "navigationBarTitleText": "公告详情"
+      }
+    },
+    {
+      "path": "pages/zhdj/ggcontent",
+      "style": {}
+    },
+    {
+      "path": "pages/zhdj/dzz",
+      "style": {
+        "navigationBarTitleText": "党组织"
+      }
+    },
+    {
+      "path": "pages/zhdj/dygl",
+      "style": {
+        "app-plus": {
+          "bounce": "none",
+          "titleNView": {
+            "buttons": [{
+                "text": "党员",
+                "fontSize": "16",
+                "float": "right",
+                "color": "#fff"
+              }
+
+            ],
+            "searchInput": {
+              "align": "center",
+              "placeholder": "请输入查找党员信息",
+              "borderRadius": "50upx",
+              "backgroundColor": "#fff"
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "pages/zhdj/dyxq",
+      "style": {
+        "navigationBarTitleText": "党员资料"
+      }
+    },
+    {
+      "path": "pages/zhdj/rctd",
+      "style": {
+        "navigationBarTitleText": "人才天地"
+      }
+    },
+    {
+      "path": "pages/sqfw/sqdh",
+      "style": {}
+    },
+    {
+      "path": "pages/sqfw/sqjs",
+      "style": {
+        "navigationBarTitleText": "社区列表",
+        "enablePullDownRefresh": true
+      }
+    },
+    {
+      "path": "pages/shzz/fromitens",
+      "style": {
+        "navigationBarTitleText": "加入组织"
+
+      }
+    },
+    {
+      "path": "pages/sqfw/sqxqjs",
+      "style": {
+        "navigationBarTitleText": "社区介绍"
+      }
+    },
+    {
+      "path": "pages/sqfw/bmym",
+      "style": {
+        "navigationBarTitleText": "活动报名"
+      }
+    },
+    {
+      "path": "pages/shzz/fromtext",
+      "style": {
+        "navigationBarTitleText": "组织详情"
+      }
+
+    },
+	{
+	  "path": "pages/shzz/zzbg",
+	  "style": {
+	   
+	  }
+	
+	},
+
+    {
+      "path": "pages/phones/phones",
+      "style": {
+        "navigationBarTitleText": "通讯录",
+        "app-plus": {
+          "bounce": "none",
+          "scrollIndicator": "none"
+        }
+      }
+    },
+    {
+      "path": "pages/phones/phone-search",
+      "style": {
+        "navigationBarTitleText": "搜索联系人"
+      }
+    },
+
+
+    {
+      "path": "pages/normal/add/add",
+      "style": {
+        "navigationBarTitleText": "新增"
+      }
+    },
+	{
+	  "path": "pages/normal/update/update",
+	  "style": {
+	    "navigationBarTitleText": "编辑"
+	  }
+	},
+	{
+	  "path": "pages/normal/update/updateEditor",
+	  "style": {
+	    "navigationBarTitleText": "富文本编辑"
+	  }
+	},
+    {
+      "path": "pages/bmfw/selectInfo/selectInfo",
+      "style": {
+        "navigationBarTitleText": "居民信息查询",
+        "app-plus": {
+          "animationType": "fade-in",
+          "animationDuration": 300
+        }
+      }
+    },
+    {
+      "path": "pages/bmfw/peopleInfo/peopleInfo",
+      "style": {
+        "navigationBarTitleText": "居民信息详情"
+      }
+    }, {
+      "path": "pages/forum/forum",
+      "style": {
+        "navigationBarTitleText": "论坛",		
+        "app-plus": {
+          "animationType": "fade-in",
+          "animationDuration": 300
+          // "titleNView": {
+          //   "type": "transparent" //透明渐变导航栏 nvue页面暂不支持
+          // }
+        }
+      }
+    }, {
+      "path": "pages/forum/add",
+      "style": {
+        "navigationBarTitleText": "发帖",
+        "app-plus": {
+          "animationType": "fade-in",
+          "animationDuration": 300
+        }
+      }
+    }, {
+      "path": "pages/forum/mine",
+      "style": {
+        "navigationBarTitleText": "我的发帖",
+		"enablePullDownRefresh": true,
+		"onReachBottomDistance": 20,
+        "app-plus": {
+          "animationType": "fade-in",
+          "animationDuration": 300
+        }
+      }
+    }, {
+      "path": "pages/ggfw/ggfw",
+      "style": {
+        "navigationBarTitleText": "公共服务"
+      }
+    },
+    {
+      "path": "pages/ggfw/fwlc",
+      "style": {
+        "navigationBarTitleText": "小区列表"
+      }
+    },
+    {
+      "path": "pages/ggfw/fwxq",
+      "style": {
+        "navigationBarTitleText": "申请流程"
+      }
+    },
+    {
+      "path": "pages/ggfw/sqyy",
+      "style": {
+        "navigationBarTitleText": "申请预约"
+      }
+    },
+    {
+      "path": "pages/forum/detail",
+      "style": {
+        "navigationBarTitleText": "详情",
+        "app-plus": {
+          "animationType": "fade-in",
+          "animationDuration": 300
+        }
+      }
+    }, {
+      "path": "pages/user/info",
+      "style": {
+        "navigationBarTitleText": "个人信息",
+        "app-plus": {
+          // "titleNView": false, //禁用原生导航栏
+          "animationType": "fade-in",
+          "animationDuration": 300
+        }
+      }
+    }, {
+      "path": "pages/user/modify",
+      "style": {
+        "navigationBarTitleText": "修改密码",
+        "app-plus": {
+          // "titleNView": false, //禁用原生导航栏
+          "animationType": "fade-in",
+          "animationDuration": 300
+        }
+      }
+    },
+    {
+      "path": "pages/forum/myPost", // 我的帖子
+      "style": {
+        "navigationBarTitleText": "我的帖子"
+      }
+    }, {
+      "path": "pages/user/register", // 注册
+      "style": {
+        "navigationBarTitleText": "注册"
+      }
+    }, {
+      "path": "pages/user/forgot", // 忘记密码
+      "style": {
+        "navigationBarTitleText": "忘记密码"
+      }
+    }, {
+      "path": "pages/forum/category", //论坛栏目
+      "style": {
+        "navigationBarTitleText": "栏目"
+      }
+    }, {
+      "path": "pages/CommunityServices/CommunityServices",
+      "style": {
+        "navigationBarTitleText": "社区服务",
+        "enablePullDownRefresh": true
+      }
+    }, {
+      "path": "pages/SecondaryPage/SecondaryPage",
+      "style": {
+        "navigationBarTitleText": "菜单"
+      }
+    },
+    {
+      "path": "pages/user/modifyInfo",
+      "style": {
+        "navigationBarTitleText": "个人信息修改"
+      }
+    },
+    {
+      "path": "pages/lists/lists",
+      "style": {
+        "navigationBarTitleText": "列表"
+      }
+    }
+  ],
+  "tabBar": {
+    "color": "#7a7e83",
+    "selectedColor": "#E51C23",
+    "backgroundColor": "#ffffff",
+    "list": [{
+        "pagePath": "pages/SmartCity/smartcity",
+        "text": "首页",
+        "iconPath": "static/img/appicon/zhdj0.png",
+        "selectedIconPath": "static/img/appicon/zhdj1.png"
+      },
+     
+      {
+        "pagePath": "pages/message/message",
+        "text": "消息",
+        "iconPath": "static/img/msg.png",
+        "selectedIconPath": "static/img/msg_active.png"
+      },
+      {
+        "pagePath": "pages/phones/phones",
+        "text": "通讯录",
+        "iconPath": "static/img/contact.png",
+        "selectedIconPath": "static/img/contact_active.png"
+      },
+      {
+        "pagePath": "pages/user/info",
+        "text": "我的",
+        "iconPath": "static/img/user.png",
+        "selectedIconPath": "static/img/user_active.png"
+      }
+    ]
+  },
+  "globalStyle": {
+    "navigationBarTextStyle": "white",
+    "navigationBarBackgroundColor": "#E51C23",
+    "backgroundColor": "#fbf9fe"
+  },
+  "condition": { //模式配置，仅开发期间生效
+    "current": 0, //当前激活的模式(list 的索引项)
+    "list": [{
+      "name": "", //模式名称
+      "path": "", //启动页面，必选
+      "query": "" //启动参数，在页面的onLoad函数里面得到
+    }]
+  }
+}
