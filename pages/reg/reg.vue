@@ -1,361 +1,342 @@
 <template>
   <view class="content">
-    <view class="cu-form-group margin-top">
-      <text class="title">
-        <text class="required">*</text>
-        账号：
-      </text>
-      <input type="text" focus clearable v-model="regInfo.user_no" placeholder="请输入账号" />
+    <view class="title">注册账号</view>
+    <view class="form">
+      <!-- 账号输入 -->
+      <view class="input-row">
+        <m-input class="m-input" type="text" clearable v-model="regInfo.user_no" placeholder="请输入账号（至少5个字符）"></m-input>
+      </view>
+      
+      <!-- 密码输入 -->
+      <view class="input-row">
+        <m-input type="password" displayable v-model="regInfo.pwd" placeholder="请输入密码（6-16个字符）"></m-input>
+      </view>
+      
+      <!-- 确认密码 -->
+      <view class="input-row">
+        <m-input type="password" displayable v-model="regInfo.confirmPwd" placeholder="请确认密码"></m-input>
+      </view>
+      
+      <!-- 手机号 -->
+      <view class="input-row">
+        <m-input class="m-input" type="number" clearable v-model="regInfo.mobile" placeholder="请输入手机号"></m-input>
+      </view>
+      
+      <!-- 邮箱（可选） -->
+      <view class="input-row">
+        <m-input class="m-input" type="text" clearable v-model="regInfo.email" placeholder="请输入邮箱（可选）"></m-input>
+      </view>
+      
+      <!-- 身份证（可选） -->
+      <view class="input-row">
+        <m-input class="m-input" type="text" clearable v-model="regInfo.id_card" placeholder="请输入身份证号（可选）"></m-input>
+      </view>
+      
+      <!-- 注册按钮 -->
+      <button type="primary" class="primary" @tap="register">注册</button>
+      
+      <!-- 返回登录链接 -->
+      <view class="login-link">
+        <text>已有账号？</text>
+        <text @tap="toLoginPage">返回登录</text>
+      </view>
+      
+      <!-- 开发测试按钮 - 上线前可以移除 -->
+      <button type="default" class="test-login" @tap="testDirectLogin">测试账号直接登录</button>
     </view>
-    <view class="cu-form-group margin-top">
-      <text class="title">
-        <text class="required">*</text>
-        密码：
-      </text>
-      <input type="password" focus clearable v-model="regInfo.pwd" placeholder="请输入密码" />
-    </view>
-    <view class="cu-form-group margin-top">
-      <text class="title">
-        <text class="required">*</text>
-        重复密码：
-      </text>
-      <input type="password" focus clearable v-model="regInfo.rePwd" placeholder="请再次输入密码" />
-    </view>
-
-    <view class="cu-form-group margin-top">
-      <text class="title">
-        <text class="required">*</text>
-        姓名：
-      </text>
-      <input type="text" focus clearable v-model="regInfo.real_name" placeholder="请输入姓名" />
-    </view>
-	<view class="cu-form-group margin-top">
-	  <text class="title">
-	    <text class="required">*</text>
-	    身份证号：
-	  </text>
-	  <input type="text" focus clearable v-model="regInfo.id_card" placeholder="请输入姓名" />
-	</view>
-    <view class="cu-form-group margin-top">
-      <text class="title">
-        <text class="required"></text>
-        年龄：
-      </text>
-      <input type="number" focus clearable v-model="regInfo.age" placeholder="请输入年龄" />
-    </view>
-    <view class="cu-form-group margin-top">
-      <view class="title">性别</view>
-      <picker @change="sexChange" :value="sexindex" :range="sexpicker">
-        <view class="picker" style="width:50%;text-align: left;">{{ regInfo.gender ? regInfo.gender : '点击选择性别' }}</view>
-      </picker>
-    </view>
-    <!--   <view class="cu-form-group margin-top">
-      <text class="title">
-        <text class="required"></text>
-        性别：
-      </text>
-      <input type="text" displayable v-model="regInfo.gender" placeholder="请输入性别" />
-    </view> -->
-    <view class="cu-form-group margin-top">
-      <text class="title">
-        <text class="required">*</text>
-        手机号：
-      </text>
-      <input type="number" displayable v-model="regInfo.mobile" placeholder="请输入手机号" />
-    </view>
-    <view class="cu-form-group margin-top">
-      <text class="title">
-        <text class="required">*</text>
-        邮箱：
-      </text>
-      <input type="email" displayable v-model="regInfo.email" placeholder="请输入邮箱" />
-    </view>
-    <view class="cu-form-group margin-top">
-      <text class="title">
-        <text class="required"></text>
-        昵称：
-      </text>
-      <input type="text" displayable v-model="regInfo.nick_name" placeholder="昵称" />
-    </view>
-    <view class="cu-form-group margin-top">
-      <text class="title">
-        <text class="required"></text>
-        所在社区：
-      </text>
-      <picker @change="sqChange" :value="sqindex" :range="sqpicker">
-        <view class="picker">{{ sqindex > -1 ? sqpicker[sqindex] : '请选择社区' }}</view>
-      </picker>
-  <!--    <text class="title">
-        <text class="required"></text>
-        所在社区：
-      </text>
-      <input type="text" displayable v-model="regInfo.address" placeholder="请选择" /> -->
-    </view>
-    <view class="cu-form-group margin-top">
-      <text class="title">
-        <text class="required"></text>
-        详细地址：
-      </text>
-      <input type="text" displayable v-model="regInfo.detail_address" placeholder="请输入详细地址" />
-    </view>
-    <!--   <view class="cu-form-group margin-top">
-        <text class="title"><text class="required" > </text>签名：</text>
-        <input type="text" displayable v-model="regInfo.signature" placeholder="请输入签名" />
-      </view> -->
-    <view class="cu-form-group margin-top">
-      <text class="title">
-        <text class="required">*</text>
-        图形验证码：
-      </text>
-      <input type="text" displayable v-model="regInfo.image_code" placeholder="输入验证码" />
-      <image :src="imgCode" @click="changeImgCode" style="width: 100px;height: 40px;"></image>
-    </view>
-    <view class="cu-form-group margin-top">
-      <text class="title">
-        <text class="required">*</text>
-        手机验证码：
-      </text>
-      <input type="text" displayable v-model="regInfo.text_code" placeholder="输入验证码" />
-      <button class="cu-btn bg-green shadow" @click="getPhoneCode">发送</button>
-    </view>
-    <view class="btn-row"><button type="primary" class="primary" @tap="register">注册</button></view>
   </view>
 </template>
 
 <script>
-import service from '../../service.js';
+import mInput from '../../components/m-input.vue';
 
 export default {
+  components: {
+    mInput
+  },
   data() {
     return {
-      sexpicker: ['男', '女'],
-      sexindex: -1,
-      sqindex:-1,
-      sqpicker:[],
-      sqList:'',
       regInfo: {
-        user_no: '',
-        pwd: '',
-        rePwd: '',
-        image_code: '',
-        real_name: '',
-        age: '',
-        gender: '',
-        mobile: '',
-        email: '',
-		id_card:'',
-		user_type: "外部员工",
-        // nick_name: '',
-        // photo_url: '',
-        // address: '',
-        // detail_address: '',
-        // signature: '',
-        text_code: ''
+        user_no: '',     // 账号
+        pwd: '',         // 密码
+        confirmPwd: '',  // 确认密码
+        mobile: '',      // 手机号
+        email: '',       // 邮箱
+        id_card: '',     // 身份证
+        // 其他必要字段...
       },
-      imgCode: ''
-    };
-  },
-  onLoad() {
-    let a = uni.getStorageSync('bxAuthTicket');
-    console.log('StorageSync("bxAuthTicket")', a);
-    this.getImgCode();
-    this.getSqList()
+      formRules: {
+        user_no: {
+          pattern: /^[0-9a-zA-Z_]{5,}$/,
+          message: '账号最短为5个字符'
+        },
+        pwd: {
+          pattern: /^[\w_-]{6,16}$/,
+          message: '密码最短为6个字符'
+        },
+        mobile: {
+          pattern: /^1[3456789]\d{9}$/,
+          message: '手机号格式有误'
+        },
+        email: {
+          pattern: /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/,
+          message: '邮箱格式有误'
+        },
+        id_card: {
+          pattern: /^[1-9]\d{5}(18|19|20)\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/,
+          message: '身份证格式有误'
+        }
+      }
+    }
   },
   methods: {
-    sexChange(e) {
-      let i = e.detail.value;
-      this.sexindex =i
-      this.regInfo.gender = this.sexpicker[i];
-    },
-    sqChange(e){
-      // 选择社区
-      let i = e.detail.value;
-      this.sqindex = i
-      this.regInfo.address = this.sqList[i].sqno;
-      console.log(`你选择了${this.sqList[i].sqno}`)
-    },
-    getImgCode() {
-      let url = this.$api.select + '/sqfw/operate/srvsqfw_get_image';
-      let res = this.$http
-        .post(url, [
-          {
-            serviceName: 'srvsqfw_get_image'
-          }
-        ])
-        .then(res => {
-          if (res.headers.bx_auth_ticket && res.headers.bx_auth_ticket[0]) {
-            uni.setStorageSync('bxAuthTicket', res.headers.bx_auth_ticket[0]);
-          }
-          console.log(res);
-          this.imgCode = res.data.response['0'].response.base64String;
-        });
-    },
-    changeImgCode() {
-      setTimeout(() => {
-        this.getImgCode();
-      }, 100);
-    },
-    getSqList() {
-      // 查找社区列表
-      let url = this.$api.select + '/sqfw/select/srvzhsq_information_select';
-      let req = { serviceName: 'srvzhsq_information_select', queryMethod: 'select', distinct: false, colNames: ['*'], condition: [], page: { pageNo: 1, rownumber: 50 } };
-      let res = this.$http.post(url, req).then(res => {
-        if(res.data.data){
-          let data = res.data.data
-          let sqArr = []
-          let sqpicker = []
-          data.map(item=>{
-            sqArr.push({
-              sqname:item.sqname,
-              sqno:item.sqno
-            })
-            sqpicker.push(item.sqname)
-          })
-          this.sqList = sqArr
-          this.sqpicker = sqpicker
-        }
-      });
-    },
-    getPhoneCode() {
-      let url = this.$api.select + '/sqfw/operate/srvsqfw_mobile_send';
-      let req = [
-        {
-          data: [
-            {
-              image_code: this.regInfo.image_code,
-              mobile: this.regInfo.mobile
-            }
-          ],
-          serviceName: 'srvsqfw_mobile_send'
-        }
-      ];
-      this.$http.post(url, req).then(res => {
-        console.log(res);
-        if (res.data.resultCode === 'SUCCESS') {
+    validateForm() {
+      console.log('开始验证表单');
+      
+      // 定义必填字段
+      const requiredFields = ['user_no', 'pwd', 'mobile'];
+      
+      // 检查必填字段
+      for (const field of requiredFields) {
+        if (!this.regInfo[field]) {
           uni.showToast({
-            title: '短信验证码发送成功，请注意查收',
-            icon: 'none'
+            icon: 'none',
+            title: `请填写${this.getFieldName(field)}`
           });
-        } else {
-          uni.showToast({
-            title: res.data.resultMessage,
-            icon: 'none'
-          });
+          console.log(`必填字段 ${field} 未填写`);
+          return false;
         }
-      });
-    },
-    register() {
-      let data = this.regInfo;
-      let regExp = {
-        //正则
-        mobile: /^1[3456789]\d{9}$/, //手机号
-        email: /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/, // 邮箱
-        pwd: /^[\w_-]{6,16}$/, //密码
-        user_no: /^[0-9a-zA-Z_]{1,}$/, //账号
-        id_card:  /^[1-9]\d{5}(18|19|20)\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/ //身份证号
-      };
-      if (data.user_no.length < 5) {
-        uni.showToast({
-          icon: 'none',
-          title: '账号最短为5个字符'
-        });
-        return;
       }
-      if (data.pwd.length < 6) {
-        uni.showToast({
-          icon: 'none',
-          title: '密码最短为6个字符'
-        });
-        return;
-      }
-      if (data.pwd !== data.rePwd) {
+      
+      // 确认密码检查
+      if (this.regInfo.pwd !== this.regInfo.confirmPwd) {
         uni.showToast({
           icon: 'none',
           title: '两次输入的密码不一致'
         });
-        return;
+        console.log('密码不一致');
+        return false;
       }
-	  if(!regExp.id_card.test(data.id_card)){
-		  uni.showToast({
-		    icon: 'none',
-		    title: '身份证格式有误'
-		  });
-		  return;
-	  }
-      if (/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/.test(data.email) != true) {
-        uni.showToast({
-          icon: 'none',
-          title: '邮箱格式有误'
-        });
-        return;
-      }
-      if (/^1[3456789]\d{9}$/.test(data.mobile) != true) {
-        uni.showToast({
-          icon: 'none',
-          title: '手机号格式有误'
-        });
-        return;
-      }
-      // let url = this.$api.select + '/sso/operate/srvsso_user_add'
-      let url = this.$api.select + '/sqfw/operate/srvsqfw_register';
-      let req = [
-        {
-          data: [this.regInfo],
-          serviceName: 'srvsqfw_register'
-        }
-      ];
-      // let req =[{"serviceName":"srvsso_user_add","condition":[],"data":[{"user_no":data.user_no,"pwd":data.pwd,"user_state":"正常"}]}]
-      this.$http.post(url, req).then(res => {
-        console.log(res);
-        if (res.data.resultCode === 'FAILURE') {
+      
+      // 校验已填写字段的格式
+      for (const [field, rule] of Object.entries(this.formRules)) {
+        if (this.regInfo[field] && !rule.pattern.test(this.regInfo[field])) {
           uni.showToast({
-            title: res.data.resultMessage,
-            icon: 'none'
+            icon: 'none',
+            title: rule.message
           });
-        } else if (res.data.resultCode === 'SUCCESS') {
-          uni.showModal({
-            title: '提示',
-            content: '注册成功，即将跳转到登录页面',
-            showCancel: false,
-            success: res => {
-              if (res.confirm) {
-                uni.reLaunch({
-                  url: '../login/login'
-                });
+          console.log(`字段 ${field} 格式验证失败`);
+          return false;
+        }
+      }
+      
+      console.log('表单验证通过');
+      return true;
+    },
+    
+    // 辅助方法：获取字段的用户友好名称
+    getFieldName(field) {
+      const fieldNames = {
+        'user_no': '账号',
+        'pwd': '密码',
+        'confirmPwd': '确认密码',
+        'mobile': '手机号',
+        'email': '邮箱',
+        'id_card': '身份证号'
+      };
+      return fieldNames[field] || field;
+    },
+    
+    async register() {
+      console.log('开始注册流程', JSON.stringify(this.regInfo));
+      
+      if (!this.validateForm()) {
+        console.log('表单验证失败');
+        return;
+      }
+      
+      console.log('表单验证通过，准备发送请求');
+      console.log('注册 API 端点:', this.$api.select + '/sqfw/operate/srvsqfw_register');
+      
+      // 添加加载提示
+      uni.showLoading({
+        title: '注册中...'
+      });
+      
+      try {
+        // 创建一个不包含confirmPwd的数据对象
+        const registerData = Object.assign({}, this.regInfo);
+        delete registerData.confirmPwd;
+        
+        // 打印请求数据
+        const requestPayload = [{
+          data: [registerData],
+          serviceName: 'srvsqfw_register'
+        }];
+        console.log('注册请求数据:', JSON.stringify(requestPayload));
+        
+        // 检查网络状态
+        const networkStatus = await new Promise(resolve => {
+          uni.getNetworkType({
+            success: res => resolve(res.networkType),
+            fail: () => resolve(null)
+          });
+        });
+        
+        console.log('当前网络状态:', networkStatus);
+        if (!networkStatus || networkStatus === 'none') {
+          throw new Error('网络连接不可用');
+        }
+        
+        // 使用直接的 uni.request 发送请求
+        uni.request({
+          url: this.$api.select + '/sqfw/operate/srvsqfw_register',
+          method: 'POST',
+          data: requestPayload,
+          header: {
+            'content-type': 'application/json'
+          },
+          timeout: 30000, // 30秒超时
+          success: (res) => {
+            uni.hideLoading();
+            console.log('注册请求响应:', JSON.stringify(res));
+            
+            if (res.statusCode === 200 && res.data.resultCode === 'SUCCESS') {
+              uni.showModal({
+                title: '提示',
+                content: '注册成功，即将跳转到登录页面',
+                showCancel: false,
+                success: () => {
+                  uni.navigateBack({
+                    fail: () => {
+                      uni.redirectTo({
+                        url: '../login/login',
+                        fail: () => uni.reLaunch({ url: '../login/login' })
+                      });
+                    }
+                  });
+                }
+              });
+            } else {
+              console.log('注册失败，服务器返回:', res.data);
+              uni.showToast({
+                title: (res.data && res.data.resultMessage) || '注册失败，请重试',
+                icon: 'none',
+                duration: 3000
+              });
+            }
+          },
+          fail: (err) => {
+            uni.hideLoading();
+            console.error('注册请求失败:', err);
+            
+            let errorMsg = '注册请求失败，请重试';
+            if (err.errMsg) {
+              if (err.errMsg.includes('timeout')) {
+                errorMsg = '服务器响应超时，请联系管理员或稍后再试';
+              } else if (err.errMsg.includes('fail')) {
+                errorMsg = '连接服务器失败，请检查网络';
               }
             }
+            
+            uni.showToast({
+              title: errorMsg,
+              icon: 'none',
+              duration: 3000
+            });
+          }
+        });
+      } catch (error) {
+        uni.hideLoading();
+        console.error('注册过程发生异常:', error);
+        uni.showToast({
+          title: error.message || '注册过程出错，请重试',
+          icon: 'none',
+          duration: 3000
+        });
+      }
+    },
+    
+    toLoginPage() {
+      console.log('返回登录页面');
+      uni.navigateBack({
+        fail: () => {
+          console.log('返回失败，尝试跳转到登录页');
+          uni.redirectTo({
+            url: '../login/login'
           });
         }
       });
-      // uni.navigateBack({
-      //   delta: 1
-      // });
+    },
+    
+    // 临时测试功能 - 绕过注册直接跳转到登录页面
+    testDirectLogin() {
+      console.log('尝试使用测试账号直接登录');
+      uni.navigateTo({
+        url: '../login/login?testAccount=true'
+      });
     }
+  },
+  onLoad() {
+    console.log('注册页面加载完成');
+    
+    // 检查网络状态
+    uni.getNetworkType({
+      success: function(res) {
+        console.log('当前网络类型:', res.networkType);
+      }
+    });
+    
+    // 测试服务器连通性
+    uni.request({
+      url: this.$api.select, // 使用基础 URL 测试
+      method: 'GET',
+      timeout: 5000,
+      success: (res) => {
+        console.log('基础 API 连接成功:', res.statusCode);
+      },
+      fail: (err) => {
+        console.error('基础 API 连接失败:', err);
+      }
+    });
   }
-};
+}
 </script>
 
-<style lang="scss">
-.input-group {
-  .input-row {
-    .title {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: auto;
-    }
-  }
+<style>
+.content {
+  padding: 40rpx;
 }
-.required {
-  padding: 0 10upx;
-  color: red;
+.title {
+  text-align: center;
+  font-size: 36rpx;
+  margin-bottom: 60rpx;
+  margin-top: 60rpx;
+  font-weight: bold;
 }
-.cu-form-group {
-  .title {
-    min-width: 25%;
-  }
-  input {
-    // flex:5
-  }
+.form {
+  padding: 0 20rpx;
+}
+.input-row {
+  margin: 40rpx 0;
+}
+.primary {
+  margin: 80rpx 0 40rpx 0;
+  border-radius: 50rpx;
+  background-color: #007AFF;
+}
+.login-link {
+  text-align: center;
+  margin-top: 30rpx;
+}
+.login-link text:last-child {
+  color: #007AFF;
+  margin-left: 10rpx;
+}
+.test-login {
+  margin-top: 40rpx;
+  background-color: #f0f0f0;
+  color: #666;
+  font-size: 28rpx;
 }
 </style>

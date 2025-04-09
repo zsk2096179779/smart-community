@@ -280,6 +280,24 @@
         }
       }
     },
+	
+	{
+	  "path": "pages/zhdj/zhdj",
+	  "style": {
+	    "navigationBarTitleText": "智慧党建",
+	    "navigationBarBackgroundColor": "#ED292A",
+	    "enablePullDownRefresh": true
+	  }
+	},
+		
+	{
+	  "path": "pages/djpx/djpx",
+	    "style": {
+	      "navigationBarTitleText": "党建培训",
+	      "enablePullDownRefresh": true
+	  }
+	},
+	
     {
       "path": "pages/phones/phone-search",
       "style": {

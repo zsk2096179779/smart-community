@@ -82,9 +82,10 @@ export default {
 		toNewPage() {
 			let treeData = this.treeData;
 			console.log(treeData)
-			if (treeData.children.length>0) {
+			if (treeData.app_dest_page) {
 				const url = treeData.app_dest_page + '?data='+ encodeURIComponent(JSON.stringify(treeData));
         console.log("treeData",treeData)
+		console.log("url",url)
         // uni.redirectTo({
         //    url: url
         // });
@@ -103,6 +104,12 @@ export default {
 		},
 		getImagePath(imgId) {
 			if (imgId) {
+				// 如果模拟数据中已经设置了 menu_icon_path，则直接赋值
+				    if (this.treeData.menu_icon_path) {
+				      this.src = this.treeData.menu_icon_path;
+				      return Promise.resolve(this.src);
+				    }
+				// 原有的通过 HTTP 请求获取图片逻辑，后续后台接入后恢复
 				let url = this.$api.select + '/file/select/srvfile_attachment_select';
 				let req = {
 					colNames: ['*'],
@@ -115,14 +122,16 @@ export default {
 					],
 					serviceName: 'srvfile_attachment_select'
 				};
-				this.$http.post(url, req).then(res => {
+				return this.$http.post(url, req).then(res => {
 					if (res.data && res.data.data && res.data.data.length > 0) {
 						let path = this.$api.select + '/file/download?filePath=' + res.data.data[0].fileurl;
 						this.src = path;
 					}
+					return this.src;
 				});
 			} else {
 				this.src = '../../static/img/sqfw.png';
+				return Promise.resolve(this.src);
 			}
 		}
 	}

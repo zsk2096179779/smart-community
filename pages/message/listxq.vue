@@ -25,37 +25,77 @@
 		},
 		data(){
 			return{
-				datalist:[],
-				id:'',
-				statusid:'',
+				datalist:[
+					{
+					                bt: "模拟消息1",
+					                fjr: "张三",
+					                modify_time: "2025-04-08 10:00",
+					                cont: "这是模拟消息1的内容"
+					            },
+					            {
+					                bt: "模拟消息2",
+					                fjr: "李四",
+					                modify_time: "2025-04-08 11:00",
+					                cont: "这是模拟消息2的内容"
+					            }
+				],
+				id:'1',
+				statusid:'1',
 				status:1
 			}
 		},
 		methods:{
 			getdatas(index){
-				console.log(this.id)
-				let url =this.$api.select +  "/sqfw/select/srvzhsq_xxtz_select"
-				let req = {};
-				req.serviceName = 'srvzhsq_xxtz_select';
-				req.colNames =  ['*'];
-				req.condition = [{colName: "id", ruleType: "eq", value: this.id}]
-				req.order = [];
+			// 	console.log(this.id)
+			// 	let url =this.$api.select +  "/sqfw/select/srvzhsq_xxtz_select"
+			// 	let req = {};
+			// 	req.serviceName = 'srvzhsq_xxtz_select';
+			// 	req.colNames =  ['*'];
+			// 	req.condition = [{colName: "id", ruleType: "eq", value: this.id}]
+			// 	req.order = [];
 			
-				this.$http.post(url, req).then(res => {
-					this.datalist=(res.data.data)
-				})
+			// 	this.$http.post(url, req).then(res => {
+			// 		this.datalist=(res.data.data)
+			// 	})
+			 // 使用模拟数据
+			    console.log("模拟获取消息数据");
+			    this.datalist = [
+			        {
+			            bt: "模拟消息1",
+			            fjr: "张三",
+			            modify_time: "2025-04-08 10:00",
+			            cont: "这是模拟消息1的内容"
+			        },
+			        {
+			            bt: "模拟消息2",
+			            fjr: "李四",
+			            modify_time: "2025-04-08 11:00",
+			            cont: "这是模拟消息2的内容"
+			        }
+			    ];
 			},
 			infolist(){
-				let url =this.$api.select + "/sso/operate/"+'srvsso_info_state_update'
-				let req = 	[
-					{"serviceName":"srvsso_info_state_update",
-					"condition":[
-						{"colName":"id","ruleType":"eq","value":this.statusid},
-					],"srvApp":"sso"},
-				]
-				this.$http.post(url, req).then(res => {
-					console.error(res)
-				})
+				// let url =this.$api.select + "/sso/operate/"+'srvsso_info_state_update'
+				// let req = 	[
+				// 	{"serviceName":"srvsso_info_state_update",
+				// 	"condition":[
+				// 		{"colName":"id","ruleType":"eq","value":this.statusid},
+				// 	],"srvApp":"sso"},
+				// ]
+				// this.$http.post(url, req).then(res => {
+				// 	console.error(res)
+				// })
+				 // 使用模拟的已读更新逻辑
+				    console.log("模拟更新消息为已读", this.statusid);
+				
+				    // 如果需要模拟已读状态更新，直接修改状态
+				    this.datalist.forEach(item => {
+				        if (item.id === this.statusid) {
+				            item.status = '已读';  // 修改状态
+				        }
+				    });
+				    // 模拟请求成功后的逻辑
+				    console.log("消息已更新为已读");
 			},
 			
 		},
