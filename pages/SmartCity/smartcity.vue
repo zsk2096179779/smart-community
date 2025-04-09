@@ -20,8 +20,14 @@
       </view>
 
       <!-- 插图 -->
-      <view class="banner" :style="{ backgroundImage: 'url(' + imageURL + ')' }"></view>
-
+      <!-- <view class="banner" :style="{ backgroundImage: 'url(' + imageURL + ')' }"></view> -->
+	  <view class="banner">
+	    <image 
+	      src="../../static/img/bannertwo.png" 
+	      mode="widthFix" 
+	      style="width:100%;"
+	    />
+	  </view>
       <!-- 活动 -->
       <view v-if="xqpage.length > 0">
         <text class="titleall">热门活动</text>
@@ -68,87 +74,125 @@ export default {
   },
   methods: {
     async getMenusList() {
-         try {
-            const url = `${this.$api.select}/auth/select/srvauth_app_menu_select`;
-            const req = {
-              serviceName: 'srvauth_app_menu_select',
-              colNames: ['*'],
-              condition: [
-                { colName: "apps", ruleType: "in", value: "zhdj,sqfw" },
-                { colName: "client_type", ruleType: "eq", value: "APP" },
-                { colName: "is_view", ruleType: "eq", value: "是" }
-              ],
-              order: [{ colName: "seq", orderType: "asc" }]
-            };
-      
-            const res = await this.$http.post(url, req);
-      
-            if (res.data.data) {
-              let menuData = res.data.data;
-              let parents = [], children = [];
-      
-              // 处理菜单数据
-              for (const menu of menuData) {
-                menu.children = [];
-                menu.label = menu.menu_name;
-                menu.value = menu.menu_no;
-                
-                if (menu.client_type?.includes('APP')) {
-                  // 使用 try-catch 处理图片加载
-                  try {
-                    if (menu.app_icon) {
-                      const iconPath = await this.getImagePath(menu.app_icon);
-                      menu.menu_icon_path = iconPath;
-                    } else {
-                      // 如果没有图标，设置一个默认图标
-                      menu.menu_icon_path = '/static/images/default-icon.png';
-                    }
-                  } catch (iconError) {
-                    console.log('图标加载失败:', iconError);
-                    // 设置默认图标
-                    menu.menu_icon_path = '/static/images/default-icon.png';
-                  }
-                  
-                  // 根据是否有父菜单分类
-                  if (menu.parent_no) {
-                    children.push(menu);
-                  } else {
-                    parents.push(menu);
-                  }
-                }
-              }
-      
-              // 建立子菜单之间的关系
-              children.forEach(item1 => {
-                children.forEach(item2 => {
-                  if (item1.parent_no === item2.menu_no) {
-                    item2.children.push(item1);
-                  }
-                });
-              });
-      
-              // 建立父菜单与子菜单的关系
-              parents.forEach(parent => {
-                children.forEach(child => {
-                  if (child.parent_no === parent.menu_no) {
-                    parent.children.push(child);
-                  }
-                });
-              });
-      
-              // 更新菜单数据
-              this.menuData = parents;
-            }
-          } catch (error) {
-            console.log('菜单加载失败:', error);
-            uni.showToast({
-              title: '菜单加载失败，请稍后重试',
-              icon: 'none'
-            });
-          } finally {
-            this.loading = false; // 确保结束加载
-          }
-        },
+      try {
+		//连接后端后运行如下代码
+        // const url = `${this.$api.select}/auth/select/srvauth_app_menu_select`;
+        // const req = {
+        //   serviceName: 'srvauth_app_menu_select',
+        //   colNames: ['*'],
+        //   condition: [
+        //     { colName: "apps", ruleType: "in", value: "zhdj,sqfw" },
+        //     { colName: "client_type", ruleType: "eq", value: "APP" },
+        //     { colName: "is_view", ruleType: "eq", value: "是" }
+        //   ],
+        //   order: [{ colName: "seq", orderType: "asc" }]
+        // };
+
+        // const res = await this.$http.post(url, req);
+
+        // if (res.data.data) {
+        //   let menuData = res.data.data;
+        //   let parents = [], children = [];
+
+        //   menuData.forEach(menu => {
+        //     menu.children = [];
+        //     menu.label = menu.menu_name;
+        //     menu.value = menu.menu_no;
+        //     if (menu.client_type?.includes('APP')) {
+        //       this.getImagePath(menu.app_icon).then(res => {
+        //         menu.menu_icon_path = res;
+        //       });
+        //       if (menu.parent_no) children.push(menu);
+        //       else parents.push(menu);
+        //     }
+        //   });
+
+        //   children.forEach(item1 => {
+        //     children.forEach(item2 => {
+        //       if (item1.parent_no === item2.menu_no) item2.children.push(item1);
+        //     });
+        //   });
+        //   parents.forEach(parent => {
+        //     children.forEach(child => {
+        //       if (child.parent_no === parent.menu_no) parent.children.push(child);
+        //     });
+        //   });
+
+        //   this.menuData = parents;
+        // }	
+		
+		// 暂时进行数据模拟，后端设计好后沿用以上代码
+		// 模拟异步请求：500ms 后返回模拟数据
+		    setTimeout(() => {
+		      // 模拟后台返回的菜单数据
+		      const mockMenus = [
+		          {
+		            menu_no: '001',
+		            menu_name: '党建',
+		            client_type: 'APP',
+		            app_icon: 'zh',
+		            parent_no: '',
+		            app_dest_page: '/pages/zhdj/zhdj' // 添加跳转地址
+		          },
+		          {
+		            menu_no: '002',
+		            menu_name: '培训',
+		            client_type: 'APP',
+		            app_icon: 'zhdj0',
+		            parent_no: '',
+		            app_dest_page: '/pages/djpx/djpx' // 添加跳转地址
+		          },
+		          {
+		            menu_no: '003',
+		            menu_name: '论坛',
+		            client_type: 'APP',
+		            app_icon: 'zhdj1',
+		            parent_no: '',
+		            app_dest_page: '/pages/forum/forum' // 添加跳转地址
+		          }
+		        ];
+		
+		      let menuData = mockMenus;
+		      let parents = [], children = [];
+		
+		      menuData.forEach(menu => {
+		        menu.children = [];
+		        menu.label = menu.menu_name;
+		        menu.value = menu.menu_no;
+		        if (menu.client_type.includes('APP')) {
+		          // 这里直接模拟返回图标路径（直接使用本地图片路径）
+		          menu.menu_icon_path = "../../static/img/appicon/" + menu.app_icon + ".png";
+		          if (menu.parent_no) children.push(menu);
+		          else parents.push(menu);
+		        }
+		      });
+		
+		      // 如果有父子关系（本例中均为顶级菜单），做简单合并
+		      children.forEach(item1 => {
+		        children.forEach(item2 => {
+		          if (item1.parent_no === item2.menu_no) item2.children.push(item1);
+		        });
+		      });
+		      parents.forEach(parent => {
+		        children.forEach(child => {
+		          if (child.parent_no === parent.menu_no) parent.children.push(child);
+		        });
+		      });
+		
+		      this.menuData = parents;
+		      this.loading = false; // 数据加载完毕后，设置 loading 为 false
+		    }, 500);
+      } catch (error) {
+        console.log('菜单加载失败:', error);
+        uni.showToast({
+          title: '菜单加载失败，请稍后重试',
+          icon: 'none'
+        });
+      } finally {
+        this.loading = false; // 确保结束加载
+      }
+    },
+
     // 跳转到登录页面
     redirectToLogin() {
       uni.navigateTo({
@@ -186,37 +230,54 @@ export default {
         });
       });
     },
+	
+	 detaile(item) {
+	      uni.navigateTo({
+	        url: '../normal/detail/detail?query=' + encodeURIComponent(JSON.stringify(item))
+	      });
+	    },
 
     // 获取活动列表
     hotlist(serve) {
-      const url = `${this.$api.select}/zhdj/select/${serve}`;
-      const req = { serviceName: serve, colNames: ['*'], condition: [], order: [], page: { pageNo: 1, rownumber: 20 } };
+      // const url = `${this.$api.select}/zhdj/select/${serve}`;
+      // const req = { serviceName: serve, colNames: ['*'], condition: [], order: [], page: { pageNo: 1, rownumber: 20 } };
       
-      this.$http.post(url, req).then(res => {
-        const path = `${this.$api.select}/file/download?filePath=`;
-        if (Array.isArray(res.data.data)) {
-          res.data.data.forEach((item, i) => {
-            if (item.slt) {
-              const imgReq = {
-                serviceName: 'srvfile_attachment_select',
-                colNames: ['*'],
-                condition: [{ colName: 'file_no', ruleType: 'eq', value: item.slt }]
-              };
-              this.$http.post(`${this.$api.select}/file/select/srvfile_attachment_select`, imgReq).then(resImg => {
-                item.slt = resImg.data?.data?.[0]?.fileurl ? path + resImg.data.data[0].fileurl : this.imageURL;
-              });
-            } else {
-              item.slt = this.imageURL;
-            }
-          });
-          this.xqpage = res.data.data;
-        }
-      }).catch(error => {
-        uni.showToast({
-          title: '活动加载失败，请稍后重试',
-          icon: 'none'
-        });
-      });
+      // this.$http.post(url, req).then(res => {
+      //   const path = `${this.$api.select}/file/download?filePath=`;
+      //   if (Array.isArray(res.data.data)) {
+      //     res.data.data.forEach((item, i) => {
+      //       if (item.slt) {
+      //         const imgReq = {
+      //           serviceName: 'srvfile_attachment_select',
+      //           colNames: ['*'],
+      //           condition: [{ colName: 'file_no', ruleType: 'eq', value: item.slt }]
+      //         };
+      //         this.$http.post(`${this.$api.select}/file/select/srvfile_attachment_select`, imgReq).then(resImg => {
+      //           item.slt = resImg.data?.data?.[0]?.fileurl ? path + resImg.data.data[0].fileurl : this.imageURL;
+      //         });
+      //       } else {
+      //         item.slt = this.imageURL;
+      //       }
+      //     });
+      //     this.xqpage = res.data.data;
+      //   }
+      // }).catch(error => {
+      //   uni.showToast({
+      //     title: '活动加载失败，请稍后重试',
+      //     icon: 'none'
+      //   });
+      // });
+	  // 模拟接口调用延迟 500ms
+	    setTimeout(() => {
+	      // 模拟返回的活动数据，每个活动包含 slt（图片）、hdbt（活动标题）、proc_status 和 create_time
+	      const mockActivities = [
+	        { id: 'a001', slt: '../../static/img/hdsss.png', hdbt: '活动一', proc_status: '完成', create_time: '2025-04-01 12:00:00' },
+	        { id: 'a002', slt: '../../static/img/hdsss.png', hdbt: '活动二', proc_status: '完成', create_time: '2025-04-02 14:30:00' },
+	        { id: 'a003', slt: '../../static/img/hdsss.png', hdbt: '活动三', proc_status: '未完成', create_time: '2025-04-03 10:00:00' }
+	      ];
+	      // 只保留状态为 "完成" 的活动进行展示
+	      this.xqpage = mockActivities.filter(item => item.proc_status === '完成');
+	    }, 500);
     },
 
     // 获取图片路径
@@ -256,11 +317,8 @@ export default {
   }
 }
 .banner {
-  height: 10vh;
-  width: calc(100% - 60upx);
-  background-size: cover;
-  margin: 0 30upx 10px 30upx;
-  border-radius: 5px;
+   margin: 0 30upx 10px 30upx;
+    border-radius: 5px;
 }
 .titleall {
   font-size: 15px;

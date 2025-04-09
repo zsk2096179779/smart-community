@@ -94,47 +94,104 @@
 				}
 			},
 		async getMenu(val) {
-				let url = this.$api.select + "/sso/select/" + 'srvsso_info_user_select'
-				let req = {};
-				req.serviceName = 'srvsso_info_user_select';
-				req.colNames = ['*'];
-				let statyue  = {
-						"colName": "info_status",
-						"ruleType": "eq",
-						"value": this.status_page
-					}
+			// 模拟数据
+			    // 模拟数据：已读、未读、全部消息
+			        const allMessages = [
+			            {
+			                info_id: "1",
+			                info_status: "未读",
+			                send_user_no: "张三",
+			                send_time: "2025-04-01 10:00:00",
+			                info_desc: "这是一条模拟消息，状态为未读"
+			            },
+			            {
+			                info_id: "2",
+			                info_status: "已读",
+			                send_user_no: "李四",
+			                send_time: "2025-04-01 10:30:00",
+			                info_desc: "这是一条模拟消息，状态为已读"
+			            },
+			            {
+			                info_id: "3",
+			                info_status: "未读",
+			                send_user_no: "王五",
+			                send_time: "2025-04-01 11:00:00",
+			                info_desc: "这是一条模拟消息，状态为未读"
+			            },
+			            {
+			                info_id: "4",
+			                info_status: "已读",
+			                send_user_no: "赵六",
+			                send_time: "2025-04-01 11:30:00",
+			                info_desc: "这是一条模拟消息，状态为已读"
+			            }
+			        ];
+			    
+			        // 根据不同的分类 index（0: 未读, 1: 已读, 2: 全部）
+			        let filteredMessages = [];
+			        if (this.indexs === 0) { // 未读消息
+			            filteredMessages = allMessages.filter(message => message.info_status === "未读");
+			        } else if (this.indexs === 1) { // 已读消息
+			            filteredMessages = allMessages.filter(message => message.info_status === "已读");
+			        } else { // 全部消息
+			            filteredMessages = allMessages;
+			        }
+			    
+			        if (val) {
+			            // 加载第一页
+			            this.valno = true
+			            this.list = filteredMessages; // 使用已筛选的消息数据
+			            this.loadingStatus(this.list.length);
+			        } else {
+			            // 加载更多数据
+			            this.valno = false
+			            this.list = this.list.concat(filteredMessages); // 模拟追加数据
+			            this.loadingStatus(filteredMessages.length);
+			        }
+				//连接后端后使用下面代码
+				// let url = this.$api.select + "/sso/select/" + 'srvsso_info_user_select'
+				// let req = {};
+				// req.serviceName = 'srvsso_info_user_select';
+				// req.colNames = ['*'];
+				// let statyue  = {
+				// 		"colName": "info_status",
+				// 		"ruleType": "eq",
+				// 		"value": this.status_page
+				// 	}
 				
-				req.condition = [{
-						"colName": "type",
-						"ruleType": "eq",
-						"value": "myinfo"
-					},
+				// req.condition = [{
+				// 		"colName": "type",
+				// 		"ruleType": "eq",
+				// 		"value": "myinfo"
+				// 	},
 					
-					{
-						"colName": "biz_type",
-						"ruleType": "eq",
-						"value": "消息通知"
-					}
-				];
-				if(this.indexs!==2){
-					req.condition.push(statyue)
-				}
-				req.order = [];
-				// req.group= [ { "colName": "count_hour", "type": "" } ]
-				req['page'] = {
-					pageNo: this.pageNo,
-					rownumber: this.rownumber
-				};
-				let res = await this.$http.post(url, req)
-				if(val){
-					this.valno=true
-					this.list = res.data.data
-					this.loadingStatus(this.list.length)
-				}else{
-					this.valno=false
-					this.list = this.list.concat(res.data.data)
-					this.loadingStatus(res.data.data.length)
-				}
+				// 	{
+				// 		"colName": "biz_type",
+				// 		"ruleType": "eq",
+				// 		"value": "消息通知"
+				// 	}
+				// ];
+				// if(this.indexs!==2){
+				// 	req.condition.push(statyue)
+				// }
+				// req.order = [];
+				// // req.group= [ { "colName": "count_hour", "type": "" } ]
+				// req['page'] = {
+				// 	pageNo: this.pageNo,
+				// 	rownumber: this.rownumber
+				// };
+				// let res = await this.$http.post(url, req)
+				// if(val){
+				// 	this.valno=true
+				// 	this.list = res.data.data
+				// 	this.loadingStatus(this.list.length)
+				// }else{
+				// 	this.valno=false
+				// 	this.list = this.list.concat(res.data.data)
+				// 	this.loadingStatus(res.data.data.length)
+				// }
+				// 到这里是源代码
+				
 					// let listboole = Boolean
 					// if (list.length == 10) {
 					// 	listboole = true

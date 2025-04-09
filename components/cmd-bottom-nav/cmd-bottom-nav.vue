@@ -61,7 +61,19 @@
               "pagePath": "/pages/tabbar/my/my",
               "text": "我的",
               "icon": "user"
-            }
+            },
+			{
+			  "pagePath": "/pages/tabbar/message/message",
+			  "text": "消息",
+			  "icon": "video"
+			},
+			{
+			  "pagePath": "/pages/tabbar/contacts/contacts",
+			  "text": "通讯录",
+			        // 如果 cmd-icon 没有定义 "contacts" 图标，可以选择其他已经定义的图标，
+			        // 或者你也可以在 cmd-icon 的样式中添加定义。例如：
+			  "icon": "heart"
+			},
           ];
         }
       },
