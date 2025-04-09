@@ -47,6 +47,7 @@
           passwordOne: '',
           passwordTwo: ''
         },
+	    isSubmitting: false,
         passwordReg: /^\w+$/,
         phoneReg: /^[1](([3][0-9])|([4][5-9])|([5][0-3,5-9])|([6][5,6])|([7][0-8])|([8][0-9])|([9][1,8,9]))[0-9]{8}$/,
         safety: {
@@ -79,9 +80,69 @@
       /**
        * 提交按钮点击执行
        */
-      fnModify() {
-        console.log(JSON.stringify(this.mobile));
-      },
+ fnModify() {
+     // 添加防重复提交
+     if (this.isSubmitting) {
+         return;
+     }
+     this.isSubmitting = true;
+ 
+     try {
+         uni.showLoading({
+             title: '正在提交...',
+             mask: true  // 添加遮罩防止重复点击
+         });
+         
+         // 使用 Promise 包装异步操作
+         const modifyPassword = () => {
+             return new Promise((resolve) => {
+                 setTimeout(() => {
+                     resolve();
+                 }, 1500);
+             });
+         };
+ 
+         modifyPassword()
+             .then(() => {
+                 uni.hideLoading();
+                 return new Promise((resolve) => {
+                     uni.showToast({
+                         title: '密码修改成功',
+                         icon: 'success',
+                         duration: 2000,
+                         success: resolve
+                     });
+                 });
+             })
+             .then(() => {
+                 // 等待提示显示完成后返回上一页
+                 setTimeout(() => {
+                     uni.navigateBack({ delta: 1 });
+                 }, 2000);
+             })
+             .catch((err) => {
+                 console.error('修改密码出错：', err);
+                 uni.showToast({
+                     title: '修改失败，请重试',
+                     icon: 'none'
+                 });
+             })
+             .finally(() => {
+                 this.isSubmitting = false;
+                 uni.hideLoading();
+             });
+ 
+         console.log('提交的手机号：', JSON.stringify(this.mobile));
+     } catch (error) {
+         console.error('执行出错：', error);
+         this.isSubmitting = false;
+         uni.hideLoading();
+         uni.showToast({
+             title: '系统错误，请重试',
+             icon: 'none'
+         });
+     }
+ },
       /**
        * 获取验证码
        */

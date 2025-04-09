@@ -73,3 +73,54 @@ module.exports = {
 	formatLocation: formatLocation,
 	dateUtils: dateUtils
 }
+
+
+// 添加样式处理相关函数
+const styleUtil = {
+  // 单位转换
+  unit: (value) => {
+    if (typeof value === 'number') {
+      return `${value}rpx`
+    }
+    return value
+  },
+
+  // 创建 nvue 样式对象
+  createNvueStyle: (styles) => {
+    return Object.keys(styles).reduce((acc, key) => {
+      acc[key] = styleUtil.unit(styles[key])
+      return acc
+    }, {})
+  },
+
+  // 合并样式对象
+  mergeStyles: (...styles) => {
+    return styles.reduce((acc, style) => {
+      return { ...acc, ...style }
+    }, {})
+  },
+
+  // 条件样式
+  conditionalStyle: (condition, trueStyle, falseStyle = {}) => {
+    return condition ? trueStyle : falseStyle
+  }
+}
+
+// 添加平台判断工具
+const platformUtil = {
+  isNVue: () => {
+    // #ifdef APP-PLUS-NVUE
+    return true
+    // #endif
+    return false
+  }
+}
+
+// 更新 module.exports
+module.exports = {
+  formatTime,
+  formatLocation,
+  dateUtils,
+  styleUtil,
+  platformUtil
+}

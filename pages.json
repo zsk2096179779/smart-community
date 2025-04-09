@@ -41,7 +41,7 @@
     {
       "path": "pages/reg/reg",
       "style": {
-        "navigationBarTitleText": "注册"
+        "navigationBarTitleText": "注册账号"
       }
     },
     {
@@ -466,8 +466,8 @@
       {
         "pagePath": "pages/message/message",
         "text": "消息",
-        "iconPath": "static/img/msg.png",
-        "selectedIconPath": "static/img/msg_active.png"
+        "iconPath": "static/img/msg_active.png",
+        "selectedIconPath": "static/img/msg.png"
       },
       {
         "pagePath": "pages/phones/phones",
@@ -478,8 +478,8 @@
       {
         "pagePath": "pages/user/info",
         "text": "我的",
-        "iconPath": "static/img/user.png",
-        "selectedIconPath": "static/img/user_active.png"
+        "iconPath": "/static/img/appicon/user.png",
+        "selectedIconPath": "/static/img/appicon/user_active.png"
       }
     ]
   },
